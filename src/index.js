@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './index.css';
+import $ from 'jquery';
+// import Popper from 'popper.js';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
@@ -10,3 +15,5 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+const baseurl = 'https://mydiary4-gbalaaka.herokuapp.com';
