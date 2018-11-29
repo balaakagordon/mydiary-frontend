@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  /* background-image: `url(${Background})`; */
+  background-color: orange;
+  height: 100%;
 }
 
 .App-logo {
@@ -30,3 +33,4 @@
     transform: rotate(360deg);
   }
 }
+
