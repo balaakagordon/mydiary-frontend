@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Background from '../../images/background.png';
+import {logoutAction} from '../../actions/loginActions';
 
 import Pages from './Pages';
 // import { logOut } from '../../common/functions';
@@ -13,7 +13,7 @@ const loggedIn = localStorage.getItem('token');
 
 const NavigationBar = () => (
   <nav className="navbar navbar-expand-lg navbar-light nav-display">
-    <Link className="navbar-brand brown" to="/homepage">
+    <Link className="navbar-brand brown" to="/home">
         MyDiary
     </Link>
     <button
@@ -32,17 +32,6 @@ const NavigationBar = () => (
         <Pages />
       </ul>
       <ToastContainer />
-      <form className="form-inline my-2 my-lg-0">
-        <input
-          className="form-control mr-sm-1 searchbar"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button className="btn btn-outline-brown" type="submit">
-            Search
-        </button>
-      </form>
       <ul className="navbar-nav">
         {loggedIn ? (
           <div className="navbar">
@@ -59,11 +48,11 @@ const NavigationBar = () => (
                 <span className="caret">{username}</span>
               </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link className="dropdown-item" to={'/profile/' + username}>
+                <Link className="dropdown-item" to={'/profile'}>
                     Profile
                 </Link>
                 <div className="dropdown-divider" />
-                <button type="button" onClick="#" className="dropdown-item">
+                <button type="button" onClick={logoutAction()} className="dropdown-item">
                   Log out
                 </button>
               </div>

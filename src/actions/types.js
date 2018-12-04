@@ -5,3 +5,7 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const GET_ENTRIES = 'GET_ENTRIES';
+export const GET_ENTRY = 'GET_ENTRY';
+export const CREATE_ENTRY = 'CREATE_ENTRY';
+export const UPDATE_ENTRY = 'UPDATE_ENTRY';
+export const FETCH_PROFILE = 'FETCH_PROFILE';

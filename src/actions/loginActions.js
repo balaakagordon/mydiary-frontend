@@ -45,8 +45,23 @@ export const loginAction = userdata => (dispatch) => {
         dispatch(loginFailure(data));
       } else if (data.access_token) {
         dispatch(loginSuccess(data));
-        const token = data.access_token;
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('username', data.user);
       }
+    });
+};
+
+export const logoutAction = () => (dispatch) => {
+  return fetch(`${baseurl}/logout`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  })
+    .then(res => res.json())
+    .then((data) => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      window.location='/';
     });
 };

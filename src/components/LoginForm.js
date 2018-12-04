@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginAction } from '../actions/loginActions';
 import { toast } from 'react-toastify';
-import history from '../history';
+import image from "../images/diary2.jpeg"
 
 
 export class LoginForm extends Component {
@@ -21,7 +21,7 @@ export class LoginForm extends Component {
       if (nextProps.status === 'loading') {
         console.log("SHOW THE LOADER")
       } else if (nextProps.status === 'success') {
-        history.push('/home');
+        window.location='/home';
       } else if (nextProps.status === 'error') {
         this.displayError(nextProps.message)
       }
@@ -87,15 +87,19 @@ export class LoginForm extends Component {
                   <br /><br />
                   <p className="small-text">
                     <u>
-                      <Link to="/register">don't have an account?</Link>
+                      <a href="/register">don't have an account?</a>
                     </u>
                   </p>
                 </form>
               </div>
               <div className="col-md-8">
                 <div id="login-image">
-                  <img className="auth-img" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="Authentication" />
-                </div>  
+                  <img
+                  className="auth-img"
+                  src={image}
+                  alt="Authentication"
+                  height="480px"/>
+                </div> 
               </div>
           </div>
         </div>
@@ -110,7 +114,7 @@ LoginForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.login.user,
+  // user: state.login.user,
   message: state.login.message,
   status: state.login.status
 });

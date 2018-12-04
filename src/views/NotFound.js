@@ -1,6 +1,4 @@
 import React from 'react';
-import NavigationBar from '../components/navigation/NavigationBar';
-import GetEntries from '../components/GetEntries';
 import Background from '../images/diary1.jpg';
 
 var sectionStyle = {
@@ -13,16 +11,12 @@ var sectionStyle = {
     backgroundRepeat: 'no-repeat',
   };
 
-const Home = () => (
+const NotFound = () => (
 	<div style={ sectionStyle }>
-		<NavigationBar />
-        <section className="container list-entries" >
-            <div className="home-heading">
-                My Stories
-            </div>
-            <GetEntries />
+        <section className="container" >
+            Sorry, this page cannot be found
         </section>
 	</div>
 );
 
-export default Home;
+export default NotFound;

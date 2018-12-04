@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { signupAction } from '../actions/signupActions';
 import { toast } from 'react-toastify';
 import history from '../history';
+import image from "../images/diary2.jpeg"
 
 
 export class SignupForm extends Component {
@@ -116,7 +117,11 @@ export class SignupForm extends Component {
               </div>
               <div className="col-md-8">
                 <div id="login-image">
-                  <img className="auth-img" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="Authentication" />
+                <img
+                  className="auth-img"
+                  src={image}
+                  alt="Authentication"
+                  height="480px"/>
                 </div>  
               </div>
           </div>

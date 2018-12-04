@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: orange;
   height: 100%;
 }
 
@@ -57,6 +56,7 @@ code {
 }
 .col-md-4 {
   padding: 20px;
+  margin-left: 20px;
   width: 30%;
 }
 
@@ -84,7 +84,21 @@ code {
   display: block;
   width: 100%;
   margin-left: 9px;
+}
 
+.entry-submit {
+  display: block;
+  width: 100px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid white;
+  margin-left: 9px;
+}
+
+.entry-submit:hover {
+  background-color: grey;
+  border: 1px solid grey;
 }
 
 .btn-submit:hover {
@@ -122,24 +136,32 @@ section {
 }
 
 .list-entries {
-  background-color: white;
   margin-top: 110px;
-  border: solid black 1px;
   height: 500px;
 }
 
 .entry-card {
-  /* position:relative;
-  z-index: 1; */
-  background-color: white;
+  color: white;
   margin: 15px 0;
-  border: solid red 1px;
   height: 100px;
 }
 
+.entry {
+  color: white;
+  margin: 5px 0;
+}
+
+.home-heading {
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+}
+
 .entry-card-display {
-  border: solid blue 1px;
+  border: solid black 1px;
   position: relative;
+  background-color: black;
+  opacity: 0.7;
   margin: 0 15px;
   padding: 15px 15px;
   width:100%;
@@ -147,10 +169,93 @@ section {
   text-align: left;
 }
 
-.entry-card-title {
-  font-size: 20px
+.entry-card-display:hover {
+  opacity: 0.9;
 }
 
-.entry-card-preview {
-  font-size: 15px 
+.entry-display {
+  border: solid black 1px;
+  position: relative;
+  background-color: black;
+  opacity: 0.7;
+  margin: 0 15px;
+  padding: 15px 15px;
+  width: 100%;
+  height: 450px;
+  text-align: left;
+}
+
+.profile-display {
+  border: solid black 1px;
+  position: relative;
+  background-color: black;
+  /* opacity: 0.7; */
+  margin: 0 15px;
+  padding: 15px 15px;
+  width: 100%;
+  height: 350px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.entry-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: orange;
+}
+
+.entry-title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  color: orange;
+}
+
+.entry-date {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: orange;
+}
+
+.entry-card-body {
+  font-size: 15px;
+  overflow: scroll !important;
+  font-weight: 500;
+  height: 50px;
+}
+
+.entry-body {
+  font-size: 15px;
+  overflow: scroll !important;
+  margin: 10px 10px;
+  height: 350px;
+  font-weight: 500;
+}
+
+.profile-body {
+  font-size: 18px;
+  margin: 10px 10px;
+  height: 250px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+.view-entry {
+  margin-top: 80px;
+  height: 100%;
+}
+
+.write-article {
+  background-color: white;
+  height: 100px;
+}
+
+#text-editor {
+  /* border: grey; */
+  height: 365px;
+}
+.form-group {
+  border-radius: 0px;
 }
