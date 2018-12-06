@@ -1,19 +1,18 @@
 language: node_js
 node_js:
   - "stable"
-addons:
-  code_climate:
-  repo_token: $mytoken
-cache:
-  directories:
-    - node_modules
+
 before_script:
-  - yarn global add codeclimate-test-reporter
+  - nvm install 8.0.0                 
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+install:
+  - yarn install
+
 script:
-  - yarn add --dev coveralls
   - yarn test -- --coverage
+
 after_success:
-  - yarn run coverage
-  - codeclimate-test-reporter < ./coverage/lcov.info
-after_script:
-  - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info 
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 1                
+  - ./cc-test-reporter upload-coverage
