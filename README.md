@@ -6,7 +6,6 @@ MyDiary is an online application where users can note down their thoughts and fe
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f305abe28793d822d7c0/test_coverage)](https://codeclimate.com/github/balaakagordon/mydiary-frontend/test_coverage)
 
 
-
 ## Getting Started
 These instructions will help you get the application running on your local machine for development and testing.
 
