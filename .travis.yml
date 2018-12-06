@@ -10,10 +10,10 @@ cache:
 before_script:
   - yarn global add codeclimate-test-reporter
 script:
-  - yarn add coveralls
-  - yarn add coverage
+  - yarn add --dev coveralls
   - yarn test -- --coverage
 after_success:
   - yarn run coverage
   - codeclimate-test-reporter < ./coverage/lcov.info
-  - yarn run coveralls
+after_script:
+  - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
