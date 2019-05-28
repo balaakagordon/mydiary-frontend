@@ -4,106 +4,122 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginAction } from '../actions/loginActions';
 import { toast } from 'react-toastify';
-import image from "../images/diary2.jpeg"
+import history from '../history';
+import FormInputField from './FormComponents/FormInputField';
+import FormSubmitButton from './FormComponents/FormSubmitButton';
 
 
 export class LoginForm extends Component {
-  state = {
-    user: {
-      email: "",
-      password: ""
-    },
-    status: "none"
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: {
+        email: '',
+        password: ''
+      },
+      loading: false,
+      message: null,
+      status: '',
+      errors: null
+    };
+
+    this.handleFormInput = this.handleFormInput.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleClearForm = this.handleClearForm.bind(this);
+    this.handleSuccess = this.handleSuccess.bind(this);
+    this.handleErrors = this.handleErrors.bind(this);
+  }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.status) {
-      if (nextProps.status === 'loading') {
-        console.log("SHOW THE LOADER")
-      } else if (nextProps.status === 'success') {
-        window.location='/home';
-      } else if (nextProps.status === 'error') {
-        this.displayError(nextProps.message)
-      }
+    if (nextProps.loading) {
+      console.log('loading...');
+    }
+    if (nextProps.status === 'success') {
+      this.handleSuccess(nextProps.message);
+    } else if (nextProps.status === 'error') {
+      this.handleErrors(nextProps.errors);
     }
   }
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSubmit = event => {
+  handleFormSubmit(event) {
     event.preventDefault();
-    const userdata = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.loginAction(userdata);
-  };
+    this.props.userSignup(this.state.user);
+  }
 
-  displayError = message => {
-    toast.error(message, {
+  handleClearForm = (event) => {
+    event.preventDefault();
+    this.setState({
+      user: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmedPassword: ''
+      },
+      loading: false,
+      message: null,
+      status: '',
+      token: '',
+      errors: null
+    })
+  }
+
+  handleFormInput(event) {
+    let {name, value} = event.target;
+    this.setState( prevState => {
+        return {
+        user :{
+          ...prevState.user, [name]: value
+        }
+      }
+    })
+  }
+
+  handleSuccess = message => {
+    toast.success(message, {
       position: toast.POSITION.TOP_CENTER,
-      hideProgressBar:true
+      hideProgressBar: true
     });
+    history.push('/home');
+  }
+
+  handleErrors = errors => {
+    for (let err in errors) {
+      toast.error(errors[err][0], {
+        position: toast.POSITION.TOP_CENTER,
+        hideProgressBar:true
+      });
+    }
   };
 
   render() {
     return (
       <div className="container auth-form">
-        <section>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-4">
-                <form onSubmit={this.handleSubmit} id="login-form">
-                <br /><br />
-                  <h2 className="centred">Login</h2>
-                  <br />
-                  <div className="row">
-                    <input
-                      className="auth-input"
-                      type="text"
-                      name="email"
-                      id="email"
-                      placeholder="Enter email here"
-                      onChange={this.onChange}/>
-                  </div>
-                  <div className="row">
-                    <input
-                      className="auth-input"
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Enter password here"
-                      onChange={this.onChange}/>
-                  </div>
-                  <br />
-                  <button
-                    type="submit"
-                    className="auth-submit"
-                    id="submit">
-                    Submit
-                  </button>
-                  <br /><br />
-                  <p className="small-text">
-                    <u>
-                      <a href="/register">don't have an account?</a>
-                    </u>
-                  </p>
-                </form>
-              </div>
-              <div className="col-md-8">
-                <div id="login-image">
-                  <img
-                  className="auth-img"
-                  src={image}
-                  alt="Authentication"
-                  height="480px"/>
-                </div> 
-              </div>
-          </div>
-        </div>
-      </section>
+        <FormInputField type={'text'}
+            title={'Email'}
+            name={'email'}
+            value={this.state.user.email}
+            placeholder={'Enter your email address'}
+            handleChange={this.handleFormInput}
+        />
+        <FormInputField type={'password'}
+            title={'Password'}
+            name={'password'}
+            value={this.state.user.password}
+            placeholder={'Enter your password'}
+            handleChange={this.handleFormInput}
+        />
+        <Link to="/">don't have an account?</Link>
+        <br />
+        <FormSubmitButton
+            action={this.handleFormSubmit}
+            title={'Submit'}
+        />
+        <FormSubmitButton
+            action={this.handleClearForm}
+            title={'Cancel'}
+        />
       </div>
     );
   }
