@@ -1,36 +1,34 @@
 import {
     SIGNUP_REQUEST,
     SIGNUP_SUCCESS,
-    SIGNUP_FAILURE 
+    SIGNUP_FAILURE
 } from '../actions/types';
+import initialState from './initialState';
 
-
-const initialState = {
-  message: '',
-  user: {},
-  status: "",
-};
-
-export default function (state = initialState, action) {
+export default function (state = initialState.signup, action) {
   switch (action.type) {
     case SIGNUP_REQUEST:
       return {
         ...state,
         status: "loading",
+        loading: true,
       };
 
     case SIGNUP_FAILURE:
       return {
         ...state,
-        message: action.payload.error,
-        status: "error",
+        loading: false,
+        errors: action.payload.data,
+        status: action.payload.status,
       };
 
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        message: action.payload,
-        status: "success",
+        loading: false,
+        message: `Welcome, ${action.payload.data.firstName}`,
+        status: action.payload.status,
+        token: action.payload.data.token
       };
 
     default:

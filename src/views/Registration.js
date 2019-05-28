@@ -4,7 +4,6 @@ import Header from '../components/Header';
 
 
 const Registration = () => (
-	// <h1>User Registration Page</h1>
 	<div>
 		<Header />
 		<SignupForm />
