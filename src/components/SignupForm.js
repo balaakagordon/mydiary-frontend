@@ -153,10 +153,6 @@ export class SignupForm extends Component {
   }
 }
 
-// SignupForm.propTypes = {
-//   userSignup: PropTypes.func.isRequired,
-// };
-
 const mapStateToProps = state => ({
   // user: state.signup.user,
   // state: state.signup,
@@ -173,4 +169,3 @@ export default withRouter(
     { userSignup }
   )(SignupForm)
 );
-// export default SignupForm;

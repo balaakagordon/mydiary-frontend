@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginAction } from '../actions/loginActions';
+import userLogin from '../actionCreators/userLogin';
 import { toast } from 'react-toastify';
 import history from '../history';
 import FormInputField from './FormComponents/FormInputField';
@@ -36,7 +36,7 @@ export class LoginForm extends Component {
       console.log('loading...');
     }
     if (nextProps.status === 'success') {
-      this.handleSuccess(nextProps.message);
+      this.handleSuccess(nextProps.message, nextProps.token);
     } else if (nextProps.status === 'error') {
       this.handleErrors(nextProps.errors);
     }
@@ -44,18 +44,15 @@ export class LoginForm extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    this.props.userSignup(this.state.user);
+    this.props.userLogin(this.state.user);
   }
 
   handleClearForm = (event) => {
     event.preventDefault();
     this.setState({
       user: {
-        firstName: '',
-        lastName: '',
         email: '',
-        password: '',
-        confirmedPassword: ''
+        password: ''
       },
       loading: false,
       message: null,
@@ -76,11 +73,13 @@ export class LoginForm extends Component {
     })
   }
 
-  handleSuccess = message => {
+  handleSuccess = (message, token) => {
     toast.success(message, {
       position: toast.POSITION.TOP_CENTER,
       hideProgressBar: true
     });
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('isLoggedIn', true);
     history.push('/home');
   }
 
@@ -125,19 +124,18 @@ export class LoginForm extends Component {
   }
 }
 
-LoginForm.propTypes = {
-  loginAction: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = state => ({
   // user: state.login.user,
+  loading: state.login.loading,
   message: state.login.message,
-  status: state.login.status
+  status: state.login.status,
+  token: state.login.token,
+  errors: state.login.errors
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { loginAction }
+    { userLogin }
   )(LoginForm)
 );
