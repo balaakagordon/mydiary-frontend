@@ -5,8 +5,7 @@ import {
     signupFailure
 } from '../actions/signupActions';
 
-// const baseUrl = process.env.REACT_APP_API_URL;
-const baseUrl = "http://127.0.0.1:8000/api";
+const baseUrl = process.env.REACT_APP_API_URL;
 const config = {
     headers: {
       'Accept': 'application/json',
@@ -17,7 +16,6 @@ const config = {
 
 const userSignup = userData => (dispatch) => {
     dispatch(signupRequest());
-    // var payload = JSON.stringify(userData);
     return axios.post(`${baseUrl}/auth/register`, JSON.stringify(userData), config)
     .then( function (response) {
         dispatch(signupSuccess(response.data));
