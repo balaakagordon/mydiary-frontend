@@ -1,7 +1,7 @@
 import React, { Component}  from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {createEntry, updateEntry} from '../actions/entriesActions';
+import {createEntry, updateEntry} from '../actions/getEntriesActions';
 import EntryForm from './EntryForm';
 import Modules from '../utils/Editorplugins';
 

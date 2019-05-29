@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import renderHTML from 'react-render-html';
-import { getEntries } from '../actions/entriesActions';
+import { getEntries } from '../actions/getEntriesActions';
 import EntryCard from './EntryCard';
 
 export class GetEntries extends Component {

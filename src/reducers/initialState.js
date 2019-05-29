@@ -14,6 +14,15 @@ export default {
     login: {
         loading: false,
         message: null,
-        status: ''
+        status: '',
+        token: '',
+        errors: null
+    },
+    entries: {
+        entries: null,
+        loading: false,
+        message: null,
+        status: null,
+        errors: null
     }
   };

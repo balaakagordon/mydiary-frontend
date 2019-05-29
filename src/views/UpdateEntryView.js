@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getEntry } from '../actions/entriesActions';
+import { getEntry } from '../actions/getEntriesActions';
 import { connect } from 'react-redux';
 import NavigationBar from '../components/navigation/NavigationBar';
 import Background from '../images/diary1.jpg';
