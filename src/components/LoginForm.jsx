@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import userLogin from '../actionCreators/userLogin';
 import { toast } from 'react-toastify';
+import Loader from 'react-loader-spinner';
 import history from '../history';
+import userLogin from '../actionCreators/userLogin';
 import FormInputField from './FormComponents/FormInputField';
 import FormSubmitButton from './FormComponents/FormSubmitButton';
 
@@ -32,9 +32,9 @@ export class LoginForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.loading) {
-      console.log('loading...');
-    }
+    // if (nextProps.loading) {
+    //   console.log('loading...');
+    // }
     if (nextProps.status === 'success') {
       this.handleSuccess(nextProps.message, nextProps.token);
     } else if (nextProps.status === 'error') {
@@ -66,7 +66,7 @@ export class LoginForm extends Component {
     let {name, value} = event.target;
     this.setState( prevState => {
         return {
-        user :{
+        user: {
           ...prevState.user, [name]: value
         }
       }
@@ -90,9 +90,24 @@ export class LoginForm extends Component {
         hideProgressBar:true
       });
     }
-  };
+  }
+
+  handleLoader = () => {
+    return (
+      <Loader
+        type="Circles"
+        color="black"
+        heigh={40}
+        width={40}
+      />
+    )
+  }
 
   render() {
+    let showLoader = null;
+    if (this.props.loading) {
+      showLoader = this.handleLoader();
+    }
     return (
       <div className="container auth-form">
         <FormInputField type={'text'}

@@ -4,8 +4,7 @@ import {
     SIGNUP_REQUEST
 } from './types';
 
-
-export const signupRequest = data => (dispatch) => {
+export const signupRequest = () => (dispatch) => {
   dispatch({
     type: SIGNUP_REQUEST
   });

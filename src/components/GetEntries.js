@@ -1,34 +1,55 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import renderHTML from 'react-render-html';
-import { getEntries } from '../actions/entriesActions';
+import getAllEntries from '../actionCreators/getAllEntries';
 import EntryCard from './EntryCard';
 
-export class GetEntries extends Component {
+class GetEntries extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      entriesData: {
+        entries: [],
+        total: 0,
+        currentPage: 1,
+        from: null,
+        to: null,
+        lastPage: null,
+        perPage: null,
+        firstPageUrl: null,
+        lastPageUrl: null,
+        prevPageUrl: null,
+        nextPageUrl: null
+      },
+      loading: false,
+      message: null,
+      status: null,
+      errors: null
+    };
+  }
+
   componentDidMount() {
-    this.props.getEntries();
+    this.props.getAllEntries();
   }
 
   render() {
     let noEntries;
     let listEntries;
-    const { entries } = this.props;
-    const data = entries || [];
-    if (data.length === 0) {
+    if (this.props.entriesData.total === 0) {
         noEntries = "You do not have any entries, yet. Get writing!"
     } else {
-        listEntries = data.map(entry => (
+        listEntries = this.props.entriesData.entries.map(entry => (
           <div key={entry.title}>
-            < a href={`${entry.entry_id}`} >
+            <a href={`${entry.id}`} >
                 <EntryCard
-                date={entry.date}
-                title={entry.title}
-                author={entry.user_id}
-                entry_id={entry.entry_id}
-                body={renderHTML(entry.data)}
-                next={entries.next}
-                previous={entries.previous}
+                  // date={entry.date}
+                  title={entry.title}
+                  author={entry.author}
+                  entry_id={entry.id}
+                  body={renderHTML(entry.body)}
+                // next={entries.next}
+                // previous={entries.previous}
                 />
             </a>
           </div>
@@ -46,11 +67,13 @@ export class GetEntries extends Component {
     );
   }
 }
-GetEntries.propTypes = {
-  getEntries: PropTypes.func.isRequired,
-};
+
 const mapStateToProps = state => ({
-  entries: state.entries.entries,
+  entriesData: state.getEntries.entriesData,
+  loading: state.getEntries.loading,
+  message: state.getEntries.message,
+  status: state.getEntries.status,
+  errors: state.getEntries.errors
 });
 
-export default connect(mapStateToProps, { getEntries })(GetEntries);
+export default connect(mapStateToProps, { getAllEntries })(GetEntries);

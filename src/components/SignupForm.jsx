@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import userSignup from '../actionCreators/userSignup';
 import { toast } from 'react-toastify';
+import Loader from 'react-loader-spinner';
 import history from '../history';
-// import cookie from 'react-cookies';
+import userSignup from '../actionCreators/userSignup';
 import FormInputField from './FormComponents/FormInputField';
 import FormSubmitButton from './FormComponents/FormSubmitButton';
 
@@ -33,12 +32,13 @@ export class SignupForm extends Component {
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
     this.handleErrors = this.handleErrors.bind(this);
+    this.handleLoader = this.handleLoader.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.loading) {
-      console.log('loading...');
-    }
+    // if (nextProps.loading) {
+    //   console.log('loading...');
+    // }
     if (nextProps.status === 'success') {
       this.handleSuccess(nextProps.message, nextProps.token);
     } else if (nextProps.status === 'error') {
@@ -73,7 +73,7 @@ export class SignupForm extends Component {
     let {name, value} = event.target;
     this.setState( prevState => {
         return {
-        user :{
+        user: {
           ...prevState.user, [name]: value
         }
       }
@@ -98,11 +98,27 @@ export class SignupForm extends Component {
         hideProgressBar:true
       });
     }
-  };
+  }
+
+  handleLoader = () => {
+    return (
+      <Loader
+        type="Circles"
+        color="black"
+        heigh={40}
+        width={40}
+      />
+    )
+  }
 
   render() {
+    let showLoader = null;
+    if (this.props.loading) {
+      showLoader = this.handleLoader();
+    }
     return (
       <div className="container auth-form">
+        <div className="loader">{showLoader}</div>
         <FormInputField type={'text'}
             title={'First Name'}
             name={'firstName'}
