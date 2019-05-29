@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 import initialState from './initialState';
 
-export default function (state = initialState.entries, action) {
+export default function (state = initialState.getEntries, action) {
   switch (action.type) {
     case GET_ENTRIES_REQUEST:
       return {
@@ -18,6 +18,7 @@ export default function (state = initialState.entries, action) {
       return {
         ...state,
         loading: false,
+        message: `Unable to load entries`,
         errors: action.payload.data,
         status: action.payload.status,
       };
@@ -25,10 +26,22 @@ export default function (state = initialState.entries, action) {
     case GET_ENTRIES_SUCCESS:
       return {
         ...state,
+        entriesData: {
+            entries: action.payload.data,
+            total: action.payload.total,
+            currentPage: action.payload.current_page,
+            from: action.payload.from,
+            to: action.payload.to,
+            lastPage: action.payload.last_page,
+            perPage: action.payload.per_page,
+            firstPageUrl: action.payload.first_page_url,
+            lastPageUrl: action.payload.last_page_url,
+            prevPageUrl: action.payload.prev_page_url,
+            nextPageUrl: action.payload.next_page_url
+        },
         loading: false,
-        message: `Unable to load entries`,
         status: action.payload.status,
-        token: action.payload.data.token
+        message: action.payload.message
       };
 
     default:

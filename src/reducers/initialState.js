@@ -18,8 +18,20 @@ export default {
         token: '',
         errors: null
     },
-    entries: {
-        entries: null,
+    getEntries: {
+        entriesData: {
+            entries: [],
+            total: 0,
+            currentPage: 1,
+            from: null,
+            to: null,
+            lastPage: null,
+            perPage: null,
+            firstPageUrl: null,
+            lastPageUrl: null,
+            prevPageUrl: null,
+            nextPageUrl: null
+        },
         loading: false,
         message: null,
         status: null,

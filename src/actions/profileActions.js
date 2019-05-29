@@ -1,6 +1,8 @@
 import {
-FETCH_PROFILE
-} from './types';
+    FETCH_PROFILE_REQUEST,
+    FETCH_PROFILE_SUCCESS,
+    FETCH_PROFILE_FAILURE
+} from '../actions/types';
     
 const baseurl = 'https://mydiary4-gbalaaka.herokuapp.com';
 const token = localStorage.getItem('token');
@@ -24,7 +26,7 @@ export const getProfile = () => (dispatch) => fetch(`${baseurl}/profile`, {
 })
     .then(data => {
     return dispatch({
-    type: FETCH_PROFILE,
+    // type: FETCH_PROFILE,
     payload: data,
     })
 });

@@ -21,10 +21,12 @@ const getAllEntries = () => (dispatch) => {
     dispatch(entriesRequest());
     return axios.get(`${baseUrl}/v1/entries`, config)
     .then(function (response) {
+        console.log(response.data)
         dispatch(entriesSuccess(response.data));
     })
     .catch(function (error) {
-        dispatch(entriesFailure(error.response.data))
+        console.log(error.response)
+        dispatch(entriesFailure(error.response))
     });
 };
 
