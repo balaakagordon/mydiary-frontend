@@ -39,7 +39,7 @@ describe("it renders props correctly", () => {
     });
     it("runs editEntry on button click", () => {
       const submit_button = wrapper.find("button");
-      console.log(submit_button);
+      // console.log(submit_button);
       submit_button.simulate("click");
       expect(editEntry).toBeDefined();
     });

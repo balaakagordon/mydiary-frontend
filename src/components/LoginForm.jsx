@@ -32,9 +32,6 @@ export class LoginForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if (nextProps.loading) {
-    //   console.log('loading...');
-    // }
     if (nextProps.status === 'success') {
       this.handleSuccess(nextProps.message, nextProps.token);
     } else if (nextProps.status === 'error') {

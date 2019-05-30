@@ -36,5 +36,39 @@ export default {
         message: null,
         status: null,
         errors: null
+    },
+    writeEntry: {
+        entry: {
+            title: '',
+            body: '',
+            lastEdited: null
+        },
+        loading: false,
+        status: null,
+        message: null,
+        errors: null
+    },
+    getEntry: {
+        entry: {
+            title: '',
+            body: '',
+            lastEdited: null
+        },
+        loading: false,
+        status: null,
+        message: null,
+        errors: null
+    },
+    getProfile: {
+        profile: {
+            firstName: null,
+            lastName: null,
+            email: null,
+            numEntries: null,
+            joined: null
+        },
+        loading: false,
+        status: null,
+        errors: null
     }
   };
