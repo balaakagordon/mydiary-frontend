@@ -12,19 +12,19 @@ var sectionStyle = {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
   };
-  
-  class WriteEntryView extends Component {
-      render() {
-        return (
-          <div style={ sectionStyle }>
-            <NavigationBar />
-            <section className="container view-entry" >
-              <WriteOrEdit
-              entryAction="creating_entry"
-              />
-            </section>
-        </div>
-    )}
-  };
+
+class WriteEntryView extends Component {
+    render() {
+      return (
+        <div style={ sectionStyle }>
+          <NavigationBar />
+          <section className="container view-entry" >
+            <WriteOrEdit
+            entryAction="creating_entry"
+            />
+          </section>
+      </div>
+  )}
+};
 
 export default WriteEntryView;

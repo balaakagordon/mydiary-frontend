@@ -1,16 +1,23 @@
 import React from 'react';
 
 
+function createLabel(props) {
+    return (
+        <label htmlFor={props.name} className="form-label">{props.title}</label>
+    )
+}
+
 const FormInputField = (props) => {
     return (
         <div className="form-group">
-            <label htmlFor={props.name} className="form-label">{props.title}</label>
+            {props.title ? createLabel(props) : null}
             <input
                 className="form-input"
                 id={props.name}
                 name={props.name}
                 type={props.type}
-                value={props.value}
+                defaultValue={props.titleValue ? props.titleValue : null}
+                // value={props.value ? props.value : null}
                 onChange={props.handleChange}
                 placeholder={props.placeholder}
             />

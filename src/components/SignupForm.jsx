@@ -36,9 +36,6 @@ export class SignupForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if (nextProps.loading) {
-    //   console.log('loading...');
-    // }
     if (nextProps.status === 'success') {
       this.handleSuccess(nextProps.message, nextProps.token);
     } else if (nextProps.status === 'error') {
@@ -159,10 +156,12 @@ export class SignupForm extends Component {
         <FormSubmitButton
             action={this.handleFormSubmit}
             title={'Submit'}
+            className=''
         />
         <FormSubmitButton
             action={this.handleClearForm}
             title={'Cancel'}
+            className=''
         />
       </div>
     );
