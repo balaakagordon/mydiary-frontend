@@ -6,7 +6,7 @@ import WriteOrEdit from '../components/WriteOrEdit';
 var sectionStyle = {
     position: "fixed",
     width: "100%",
-    height: "800px",
+    height: "1200px",
     backgroundImage: `url(${Background})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -18,9 +18,9 @@ class WriteEntryView extends Component {
       return (
         <div style={ sectionStyle }>
           <NavigationBar />
-          <section className="container view-entry" >
+          <section className="container" >
             <WriteOrEdit
-            entryAction="creating_entry"
+              entryAction="creating_entry"
             />
           </section>
       </div>

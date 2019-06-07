@@ -1,8 +1,8 @@
-import {
-    FETCH_PROFILE_REQUEST,
-    FETCH_PROFILE_SUCCESS,
-    FETCH_PROFILE_FAILURE
-} from '../actions/types';
+// import {
+//     FETCH_PROFILE_REQUEST,
+//     FETCH_PROFILE_SUCCESS,
+//     FETCH_PROFILE_FAILURE
+// } from '../actions/types';
     
 const baseurl = 'https://mydiary4-gbalaaka.herokuapp.com';
 const token = localStorage.getItem('token');

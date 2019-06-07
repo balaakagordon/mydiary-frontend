@@ -16,12 +16,10 @@ var sectionStyle = {
 const Home = () => (
 	<div style={ sectionStyle }>
 		<NavigationBar />
-        <section className="container list-entries" >
-            <div className="home-heading">
-                My Stories
-            </div>
+        <body className="container" >
+            <div className="home-heading">My Stories</div>
             <GetEntries />
-        </section>
+        </body>
 	</div>
 );
 

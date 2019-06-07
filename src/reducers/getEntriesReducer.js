@@ -27,17 +27,17 @@ export default function (state = initialState.getEntries, action) {
       return {
         ...state,
         entriesData: {
-            entries: action.payload.data,
-            total: action.payload.total,
-            currentPage: action.payload.current_page,
-            from: action.payload.from,
-            to: action.payload.to,
-            lastPage: action.payload.last_page,
-            perPage: action.payload.per_page,
-            firstPageUrl: action.payload.first_page_url,
-            lastPageUrl: action.payload.last_page_url,
-            prevPageUrl: action.payload.prev_page_url,
-            nextPageUrl: action.payload.next_page_url
+            entries: action.payload.data.data,
+            total: action.payload.data.total,
+            currentPage: action.payload.data.current_page,
+            from: action.payload.data.from,
+            to: action.payload.data.to,
+            lastPage: action.payload.data.last_page,
+            perPage: action.payload.data.per_page,
+            firstPageUrl: action.payload.data.first_page_url,
+            lastPageUrl: action.payload.data.last_page_url,
+            prevPageUrl: action.payload.data.prev_page_url,
+            nextPageUrl: action.payload.data.next_page_url
         },
         loading: false,
         status: action.payload.status,

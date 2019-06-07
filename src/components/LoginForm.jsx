@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
-import Loader from 'react-loader-spinner';
-import history from '../history';
-import userLogin from '../actionCreators/userLogin';
-import FormInputField from './FormComponents/FormInputField';
-import FormSubmitButton from './FormComponents/FormSubmitButton';
-
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
+import Loader from "react-loader-spinner";
+import history from "../history";
+import userLogin from "../actionCreators/userLogin";
+import FormInputField from "./FormComponents/FormInputField";
+import Button from "./FormComponents/Button";
 
 export class LoginForm extends Component {
   constructor(props) {
@@ -15,12 +14,12 @@ export class LoginForm extends Component {
 
     this.state = {
       user: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       },
       loading: false,
       message: null,
-      status: '',
+      status: "",
       errors: null
     };
 
@@ -32,9 +31,9 @@ export class LoginForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.status === 'success') {
-      this.handleSuccess(nextProps.message, nextProps.token);
-    } else if (nextProps.status === 'error') {
+    if (nextProps.status === "success") {
+      return this.handleSuccess(nextProps.message, nextProps.token)
+    } else if (nextProps.status === "error") {
       this.handleErrors(nextProps.errors);
     }
   }
@@ -44,61 +43,64 @@ export class LoginForm extends Component {
     this.props.userLogin(this.state.user);
   }
 
-  handleClearForm = (event) => {
+  handleClearForm = event => {
     event.preventDefault();
     this.setState({
       user: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       },
       loading: false,
       message: null,
-      status: '',
-      token: '',
+      status: "",
+      token: "",
       errors: null
-    })
-  }
+    });
+  };
 
   handleFormInput(event) {
-    let {name, value} = event.target;
-    this.setState( prevState => {
-        return {
+    let { name, value } = event.target;
+    this.setState(prevState => {
+      return {
         user: {
-          ...prevState.user, [name]: value
+          ...prevState.user,
+          [name]: value
         }
-      }
-    })
+      };
+    });
   }
 
-  handleSuccess = (message, token) => {
+  handleSuccess = async (message, token) => {
     toast.success(message, {
       position: toast.POSITION.TOP_CENTER,
-      hideProgressBar: true
+      hideProgressBar: false
     });
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('isLoggedIn', true);
-    history.push('/home');
-  }
+
+    await sessionStorage.setItem("token", token);
+    await sessionStorage.setItem("isLoggedIn", true);
+
+    history.push("/home");
+  };
 
   handleErrors = errors => {
     for (let err in errors) {
       toast.error(errors[err][0], {
         position: toast.POSITION.TOP_CENTER,
-        hideProgressBar:true
+        hideProgressBar: true
       });
     }
-  }
+  };
 
   handleLoader = () => {
     return (
       <Loader
         type="Circles"
         color="black"
-        heigh={40}
+        height={40}
         width={40}
       />
     )
-  }
+  };
 
   render() {
     let showLoader = null;
@@ -106,31 +108,44 @@ export class LoginForm extends Component {
       showLoader = this.handleLoader();
     }
     return (
-      <div className="container auth-form">
-        <FormInputField type={'text'}
-            title={'Email'}
-            name={'email'}
-            value={this.state.user.email}
-            placeholder={'Enter your email address'}
-            handleChange={this.handleFormInput}
+      <div className="auth-form">
+        {showLoader}
+        <FormInputField
+          type={"text"}
+          title={"Email"}
+          name={"email"}
+          value={this.state.user.email}
+          placeholder={"Enter your email address"}
+          handleChange={this.handleFormInput}
+          className={'auth-form-input'}
         />
-        <FormInputField type={'password'}
-            title={'Password'}
-            name={'password'}
-            value={this.state.user.password}
-            placeholder={'Enter your password'}
-            handleChange={this.handleFormInput}
+        <FormInputField
+          type={"password"}
+          title={"Password"}
+          name={"password"}
+          value={this.state.user.password}
+          placeholder={"Enter your password"}
+          handleChange={this.handleFormInput}
+          className={'auth-form-input'}
         />
-        <Link to="/">don't have an account?</Link>
-        <br />
-        <FormSubmitButton
-            action={this.handleFormSubmit}
-            title={'Submit'}
-        />
-        <FormSubmitButton
-            action={this.handleClearForm}
-            title={'Cancel'}
-        />
+        <div className="auth-link">
+          <Link to="/">don't have an account?</Link>
+        </div>
+        <div className="row">
+          <div className="form-buttons">
+            <Button
+              action={this.handleFormSubmit}
+              title={"Submit"}
+              className='auth-button auth-submit'
+            />
+            <Button
+              action={this.handleClearForm}
+              title={"Cancel"}
+              className='auth-button auth-cancel'
+            />
+
+          </div>
+        </div>
       </div>
     );
   }

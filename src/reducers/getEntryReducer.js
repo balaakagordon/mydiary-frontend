@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 import initialState from './initialState';
 
-export default function (state = initialState.getEntries, action) {
+export default function (state = initialState.getEntry, action) {
   switch (action.type) {
     case GET_ENTRY_REQUEST:
       return {
@@ -27,9 +27,11 @@ export default function (state = initialState.getEntries, action) {
       return {
         ...state,
         entry: {
-            title: action.payload,
-            body: action.payload,
-            lastEdited: action.payload
+            id: action.payload.data.id,
+            author: action.payload.data.author,
+            title: action.payload.data.title,
+            body: action.payload.data.body,
+            lastEdited: action.payload.data.updated_at
         },
         loading: false,
         status: action.payload.status,

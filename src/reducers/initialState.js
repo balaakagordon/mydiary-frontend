@@ -1,10 +1,5 @@
 export default {
     signup: {
-        // user: {
-        //     message: '',
-        //     user: {},
-        //     status: "",
-        // },
         loading: false,
         message: null,
         status: '',
@@ -50,6 +45,8 @@ export default {
     },
     getEntry: {
         entry: {
+            id: null,
+            author: null,
             title: '',
             body: '',
             lastEdited: null
