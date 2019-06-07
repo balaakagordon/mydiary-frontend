@@ -1,56 +1,50 @@
-import React, { Component } from 'react';
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css';
-import FormInputField from './FormComponents/FormInputField'
-import FormSubmitButton from './FormComponents/FormSubmitButton'
+import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import FormInputField from "./FormComponents/FormInputField";
+import Button from "./FormComponents/Button";
 
-
-class EntryForm extends Component {
-
-render() {
+const EntryForm = (props) => {
   return (
-    <div className="container">
-            <FormInputField
-              type={'text'}
-              // title={'First Name'}
-              name={'title'}
-              id={'title'}
-              className="form-control"
-              defaultValue={this.props.titleValue}
-              value={this.props.titleValue}
-              handleChange={this.props.handleTitleChange}
-              placeholder={'Your title here...'}
-            />
-            {/* <div className="form-group"> */}
-                <ReactQuill
-                  id="text-editor"
-                  value={this.props.body}
-                  onChange={this.props.handleBodyChange}
-                  modules={this.props.modules}
-                  formats={this.props.formats}
-                  placeholder="Your story here..."
-                  style={{
-                      height: '350px',
-                      background: 'white',
-                  }}
-                />
-            {/* </div> */}
-        <div className="form-group">
-          <br />
-          <br />
-          <br />
-          <br />
-          <center>
-            <FormSubmitButton
-              action={this.props.handleSubmit}
-              title={'Submit'}
-              className={"entry-submit"}
-            />
-          </center>
-        </div>
+    <div>
+      <div>
+        <FormInputField
+          type={"text"}
+          name={"title"}
+          id={"title"}
+          className="entry-title-input"
+          titleValue={props.titleValue}
+          handleChange={props.handleTitleChange}
+          placeholder={"Your title here..."}
+        />
+      </div>
+      <div>
+        <ReactQuill
+          id="text-editor"
+          value={props.body}
+          onChange={props.handleBodyChange}
+          modules={props.modules}
+          formats={props.formats}
+          placeholder="Your story here..."
+          style={{
+            width: "80%",
+            margin: "3% auto 3% auto",
+            paddingBottom: "40px",
+            background: "white",
+            border: "solid 1px",
+          }}
+        />
+
+      </div>
+        <center>
+          <Button
+            action={props.handleSubmit}
+            title={"Submit"}
+            className={"entry-submit"}
+          />
+        </center>
     </div>
   );
-}
 }
 
 export default EntryForm;

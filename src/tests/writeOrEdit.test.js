@@ -24,7 +24,7 @@ let handleChange = jest.fn();
 let entryAction = "creating_entry";
 let titleValue = "test title";
 let bodyValue = "test body";
-let entry_id = 1;
+let entryId = 1;
 
 const create_props = {
   createEntry,
@@ -37,7 +37,7 @@ const create_props = {
 const update_props = {
   createEntry,
   updateEntry,
-  entry_id,
+  entryId,
   // entryAction,
   titleValue,
   bodyValue
@@ -47,41 +47,42 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("Creating a new entry", () => {
   beforeEach(() => {
     wrapper = shallow(
-      <WriteOrEdit match={{ params: { entry_id: 1 } }} {...create_props} />
+      <WriteOrEdit match={{ params: { entryId: 1 } }} {...create_props} />
     );
   });
   it("handleChange to be called", () => {
-    wrapper.instance().handleChange()
+    wrapper.instance().handleChange();
     expect(wrapper.state).toBeDefined();
   });
   it("handleSubmit to be called", () => {
-    wrapper.instance().handleSubmit({preventDefault:jest.fn()})
+    wrapper.instance().handleSubmit({ preventDefault: jest.fn() });
   });
   it("change to be called", () => {
-    wrapper.instance().change({ target: { name: "title", value: "the title" } })
+    wrapper
+      .instance()
+      .change({ target: { name: "title", value: "the title" } });
   });
   it("change to be called", () => {
-    wrapper.setProps({titleValue: "new title"})
-    
+    wrapper.setProps({ titleValue: "new title" });
   });
 });
 
 describe("Creating a new entry", () => {
-  let entryAction= "updating_entry"
+  let entryAction = "updating_entry";
   const update_props = {
     createEntry,
     updateEntry,
-    entry_id,
+    entryId,
     entryAction,
     titleValue,
     bodyValue
   };
   beforeEach(() => {
     wrapper = shallow(
-      <WriteOrEdit match={{ params: { entry_id: 1 } }} {...update_props} />
+      <WriteOrEdit match={{ params: { entryId: 1 } }} {...update_props} />
     );
   });
   it("handleSubmit to be called", () => {
-    wrapper.instance().handleSubmit({preventDefault:jest.fn()})
+    wrapper.instance().handleSubmit({ preventDefault: jest.fn() });
   });
-})
+});

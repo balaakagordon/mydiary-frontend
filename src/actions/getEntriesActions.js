@@ -13,7 +13,7 @@ export const entriesRequest = () => (dispatch) => {
 export const entriesSuccess = (data) => (dispatch) => {
     dispatch({
         type: GET_ENTRIES_SUCCESS,
-        payload: data.data,
+        payload: data,
     });
 };
 

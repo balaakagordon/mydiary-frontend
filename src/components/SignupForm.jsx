@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner';
 import history from '../history';
 import userSignup from '../actionCreators/userSignup';
 import FormInputField from './FormComponents/FormInputField';
-import FormSubmitButton from './FormComponents/FormSubmitButton';
+import Button from './FormComponents/Button';
 
 
 export class SignupForm extends Component {
@@ -77,14 +77,15 @@ export class SignupForm extends Component {
     })
   }
 
-  handleSuccess = (message, token) => {
+  handleSuccess = async (message, token) => {
     toast.success(message, {
       position: toast.POSITION.TOP_CENTER,
       hideProgressBar: true
     });
     // COOOOOOOOOKIEESS!!!!!!
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('isLoggedIn', true);
+    await sessionStorage.setItem('token', token);
+    await sessionStorage.setItem('isLoggedIn', true);
+
     history.push('/home');
   }
 
@@ -102,7 +103,7 @@ export class SignupForm extends Component {
       <Loader
         type="Circles"
         color="black"
-        heigh={40}
+        height={40}
         width={40}
       />
     )
@@ -114,7 +115,7 @@ export class SignupForm extends Component {
       showLoader = this.handleLoader();
     }
     return (
-      <div className="container auth-form">
+      <div className="auth-form">
         <div className="loader">{showLoader}</div>
         <FormInputField type={'text'}
             title={'First Name'}
@@ -122,6 +123,7 @@ export class SignupForm extends Component {
             value={this.state.user.firstName}
             placeholder={'Enter your first name'}
             handleChange={this.handleFormInput}
+            className={'auth-form-input'}
         />
         <FormInputField type={'text'}
             title={'Last Name'}
@@ -129,6 +131,7 @@ export class SignupForm extends Component {
             value={this.state.user.lastName}
             placeholder={'Enter your last name'}
             handleChange={this.handleFormInput}
+            className={'auth-form-input'}
         />
         <FormInputField type={'text'}
             title={'Email'}
@@ -136,6 +139,7 @@ export class SignupForm extends Component {
             value={this.state.user.email}
             placeholder={'Enter your email address'}
             handleChange={this.handleFormInput}
+            className={'auth-form-input'}
         />
         <FormInputField type={'password'}
             title={'Password'}
@@ -143,6 +147,7 @@ export class SignupForm extends Component {
             value={this.state.user.password}
             placeholder={'Enter your password'}
             handleChange={this.handleFormInput}
+            className={'auth-form-input'}
         />
         <FormInputField type={'password'}
             title={'Confirm Password'}
@@ -150,19 +155,25 @@ export class SignupForm extends Component {
             value={this.state.user.confirmPassword}
             placeholder={'Re-enter your password'}
             handleChange={this.handleFormInput}
+            className={'auth-form-input'}
         />
-        <Link to="/">already have an account?</Link>
-        <br />
-        <FormSubmitButton
-            action={this.handleFormSubmit}
-            title={'Submit'}
-            className=''
-        />
-        <FormSubmitButton
-            action={this.handleClearForm}
-            title={'Cancel'}
-            className=''
-        />
+        <div className="auth-link">
+          <Link to="/">already have an account?</Link>
+        </div>
+        <div className='row'>
+          <div className='form-buttons'>
+            <Button
+                action={this.handleFormSubmit}
+                title={'Submit'}
+                className='auth-button auth-submit'
+            />
+            <Button
+                action={this.handleClearForm}
+                title={'Cancel'}
+                className='auth-button auth-cancel'
+            />
+          </div>
+        </div>
       </div>
     );
   }

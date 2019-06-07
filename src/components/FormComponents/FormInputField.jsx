@@ -3,24 +3,27 @@ import React from 'react';
 
 function createLabel(props) {
     return (
-        <label htmlFor={props.name} className="form-label">{props.title}</label>
+        <div className="col-label">
+            <label htmlFor={props.name} className="auth-form-label">{props.title}</label>
+        </div>
     )
 }
 
 const FormInputField = (props) => {
     return (
-        <div className="form-group">
+        <div>
             {props.title ? createLabel(props) : null}
-            <input
-                className="form-input"
-                id={props.name}
-                name={props.name}
-                type={props.type}
-                defaultValue={props.titleValue ? props.titleValue : null}
-                // value={props.value ? props.value : null}
-                onChange={props.handleChange}
-                placeholder={props.placeholder}
-            />
+            <div className={props.title ? "col-input" : "entry-title"}>
+                <input
+                    className={props.className}
+                    id={props.name}
+                    name={props.name}
+                    type={props.type}
+                    defaultValue={props.titleValue ? props.titleValue : null}
+                    onChange={props.handleChange}
+                    placeholder={props.placeholder}
+                />
+            </div>
         </div>
     )
 }

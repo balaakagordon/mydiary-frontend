@@ -24,7 +24,8 @@ const getAllEntries = () => (dispatch) => {
         dispatch(entriesSuccess(response.data));
     })
     .catch(function (error) {
-        dispatch(entriesFailure(error.response))
+        console.log(error.response);
+        // dispatch(entriesFailure(error.response))
     });
 };
 

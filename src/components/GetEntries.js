@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import renderHTML from 'react-render-html';
-import getAllEntries from '../actionCreators/getAllEntries';
-import EntryCard from './EntryCard';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import renderHTML from "react-render-html";
+import getAllEntries from "../actionCreators/getAllEntries";
+import PreviewEntryCard from "./PreviewEntryCard";
 
 class GetEntries extends Component {
   constructor(props) {
@@ -33,36 +34,51 @@ class GetEntries extends Component {
     this.props.getAllEntries();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('next ==> ', nextProps.entriesData);
+    this.setState({
+      entriesData: nextProps.entriesData
+    });
+  }
+
+  showEntries() {
+    // use for loop to get next and prev indices
+  }
+
   render() {
     let noEntries;
     let listEntries;
-    if (this.props.entriesData.total === 0) {
-        noEntries = "You do not have any entries, yet. Get writing!"
+    if (this.state.entriesData.total === 0) {
+      noEntries = "You do not have any entries, yet. Get writing!";
+      listEntries = null;
     } else {
-        listEntries = this.props.entriesData.entries.map(entry => (
-          <div key={entry.title}>
-            <a href={`${entry.id}`} >
-                <EntryCard
-                  // date={entry.date}
-                  title={entry.title}
-                  author={entry.author}
-                  entry_id={entry.id}
-                  body={renderHTML(entry.body)}
-                // next={entries.next}
-                // previous={entries.previous}
-                />
-            </a>
-          </div>
-        ));
-      }
-    return (
-      <div>
-        <div className="container">
-            {listEntries}
-            {noEntries
-            ? <div className="jumbotron"><center>{noEntries}</center></div> : ''}
+      listEntries = this.state.entriesData.entries.map(entry => (
+        <div key={entry.title}>
+          <Link to={`${entry.id}`}>
+            <PreviewEntryCard
+              date={entry.updated_at}
+              title={entry.title}
+              author={entry.author}
+              entryId={entry.id}
+              body={renderHTML(entry.body)}
+              // next={entries.next}
+              // previous={entries.previous}
+            />
+          </Link>
         </div>
-        <br />
+      ));
+      noEntries = null;
+    }
+    return (
+      <div className='entries-window'>
+        {listEntries}
+        {noEntries ? (
+          <div className="jumbotron">
+            <center>{noEntries}</center>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
@@ -76,4 +92,7 @@ const mapStateToProps = state => ({
   errors: state.getEntries.errors
 });
 
-export default connect(mapStateToProps, { getAllEntries })(GetEntries);
+export default connect(
+  mapStateToProps,
+  { getAllEntries }
+)(GetEntries);
