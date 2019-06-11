@@ -86,7 +86,9 @@ export class SignupForm extends Component {
     await sessionStorage.setItem('token', token);
     await sessionStorage.setItem('isLoggedIn', true);
 
-    history.push('/home');
+    if (sessionStorage.getItem("token")) {
+      history.push("/home");
+    }
   }
 
   handleErrors = errors => {
@@ -180,8 +182,6 @@ export class SignupForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  // user: state.signup.user,
-  // state: state.signup,
   loading: state.signup.loading,
   message: state.signup.message,
   status: state.signup.status,

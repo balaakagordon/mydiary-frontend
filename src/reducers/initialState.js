@@ -67,5 +67,8 @@ export default {
         loading: false,
         status: null,
         errors: null
-    }
+    },
+    navbar: {
+        authenticated: false,
+    },
   };
