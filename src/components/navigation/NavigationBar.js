@@ -1,76 +1,62 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {logoutAction} from '../../actions/loginActions';
-
-import Pages from './Pages';
+import history from '../../history';
+import jwt_decode from 'jwt-decode';
+// import {logoutAction} from '../../actions/loginActions';
+import NavLinks from './NavLinks';
 // import { logOut } from '../../common/functions';
 
-const username = localStorage.getItem('username');
-const loggedIn = localStorage.getItem('token');
 
+class NavigationBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        authenticated: false
+      };
+  }
 
-const NavigationBar = () => (
-  <nav className="navbar navbar-expand-lg navbar-light nav-display">
-    <Link className="navbar-brand brown" to="/home">
-        MyDiary
-    </Link>
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon" />
-    </button>
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav mr-auto">
-        <Pages />
-      </ul>
-      <ToastContainer />
-      <ul className="navbar-nav">
-        {loggedIn ? (
-          <div className="navbar">
-            <li className="nav-item">
-              <Link
-                className="nav-link dropdown-toggle"
-                to="./"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span className="caret">{username}</span>
-              </Link>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link className="dropdown-item" to={'/profile'}>
-                    Profile
-                </Link>
-                <div className="dropdown-divider" />
-                <button type="button" onClick={logoutAction()} className="dropdown-item">
-                  Log out
-                </button>
-              </div>
-            </li>
-          </div>
-        ) : (
-          <button
-            className="btn btn-outline-brown margin-4"
-            type="button"
-            data-toggle="modal"
-            data-target="#authModal"
-          >
-              Login
-          </button>
-        )}
-      </ul>
-    </div>
-  </nav>
-);
+    componentWillMount() {
+      var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+      if (isLoggedIn) {
+        console.log('isLoggedIn ==> ', isLoggedIn);
+        // const token = sessionStorage.getItem('token');
+        // let user = jwt_decode(token);
+        this.setState({authenticated: isLoggedIn});
+        // REDIRECT IF ON AUTH PAGE
+      } else {
+        history.push('/');
+      }
+    }
 
-export default NavigationBar;
+    componentWillReceiveProps(nextProps) {
+      console.log('next auth ', nextProps.authenticated);
+      if (nextProps.authenticated) {
+        this.setState({authenticated: nextProps.authenticated});
+      }
+    }
+
+  render() {
+    return (
+      <div className="navbar-display">
+      {console.log('authenticated', this.state.authenticated)}
+        <ul>
+          <NavLinks authenticated={this.state.authenticated} />
+        </ul>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  authenticated: state.navbar.authenticated
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    {}
+    )(NavigationBar)
+    );

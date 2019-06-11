@@ -4,6 +4,7 @@ import {
     signupSuccess,
     signupFailure
 } from '../actions/signupActions';
+import { authenticatedNavbar } from '../actions/navbarActions';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 const config = {
@@ -18,6 +19,11 @@ const userSignup = userData => (dispatch) => {
     dispatch(signupRequest());
     return axios.post(`${baseUrl}/auth/register`, JSON.stringify(userData), config)
     .then( function (response) {
+        if (response.data.data.token) {
+            sessionStorage.setItem('token', response.data.data.token);
+            sessionStorage.setItem('isLoggedIn', true);
+        }
+        dispatch(authenticatedNavbar());
         dispatch(signupSuccess(response.data));
     })
     .catch(function (error) {

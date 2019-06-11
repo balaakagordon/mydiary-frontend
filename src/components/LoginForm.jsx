@@ -78,8 +78,11 @@ export class LoginForm extends Component {
 
     await sessionStorage.setItem("token", token);
     await sessionStorage.setItem("isLoggedIn", true);
+    // console.log('======awaited======');
 
-    history.push("/home");
+    if (sessionStorage.getItem("token")) {
+      history.push("/home");
+    }
   };
 
   handleErrors = errors => {

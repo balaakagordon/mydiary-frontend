@@ -13,6 +13,7 @@
     "fetch-mock": "^7.2.5",
     "history": "^4.7.2",
     "jquery": "^3.3.1",
+    "jwt-decode": "^2.2.0",
     "node-fetch": "^2.3.0",
     "npm-check": "^5.9.0",
     "popper": "^1.0.1",

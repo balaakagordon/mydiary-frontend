@@ -1,23 +1,11 @@
 import React, {Component} from 'react';
-import NavigationBar from '../components/navigation/NavigationBar';
-import Background from '../images/diary1.jpg';
 import WriteOrEdit from '../components/WriteOrEdit';
 
-var sectionStyle = {
-    position: "fixed",
-    width: "100%",
-    height: "1200px",
-    backgroundImage: `url(${Background})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-  };
 
 class WriteEntryView extends Component {
     render() {
       return (
-        <div style={ sectionStyle }>
-          <NavigationBar />
+        <div>
           <section className="container" >
             <WriteOrEdit
               entryAction="creating_entry"
