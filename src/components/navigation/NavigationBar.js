@@ -21,7 +21,6 @@ class NavigationBar extends Component {
     componentWillMount() {
       var isLoggedIn = sessionStorage.getItem('isLoggedIn');
       if (isLoggedIn) {
-        console.log('isLoggedIn ==> ', isLoggedIn);
         // const token = sessionStorage.getItem('token');
         // let user = jwt_decode(token);
         this.setState({authenticated: isLoggedIn});
@@ -32,7 +31,6 @@ class NavigationBar extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-      console.log('next auth ', nextProps.authenticated);
       if (nextProps.authenticated) {
         this.setState({authenticated: nextProps.authenticated});
       }
@@ -41,7 +39,6 @@ class NavigationBar extends Component {
   render() {
     return (
       <div className="navbar-display">
-      {console.log('authenticated', this.state.authenticated)}
         <ul>
           <NavLinks authenticated={this.state.authenticated} />
         </ul>

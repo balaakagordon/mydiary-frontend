@@ -82,9 +82,8 @@ export class SignupForm extends Component {
       position: toast.POSITION.TOP_CENTER,
       hideProgressBar: true
     });
-    // COOOOOOOOOKIEESS!!!!!!
-    await sessionStorage.setItem('token', token);
-    await sessionStorage.setItem('isLoggedIn', true);
+    // await sessionStorage.setItem('token', token);
+    // await sessionStorage.setItem('isLoggedIn', true);
 
     if (sessionStorage.getItem("token")) {
       history.push("/home");

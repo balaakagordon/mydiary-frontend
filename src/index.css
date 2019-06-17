@@ -23,6 +23,57 @@ code {
     monospace;
 }
 
+.navbar-display {
+  background-image: linear-gradient(rgb(207, 117, 0), orange);
+  height: 4%;
+  overflow: auto;
+}
+
+.navbar-icon {
+  background-image: linear-gradient(to bottom right, rgb(207, 48, 0), orange);
+  font-weight: bold;
+  font-size: 20px;
+  border-right: 3px solid white;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.navbar-item a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav-auth {
+  float:right
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(102, 91, 71);
+}
+
+a:hover {
+  color: rgb(155, 136, 101);
+}
+
 .auth-form {
   border: solid 1px gray;
   border-radius: 7px;
@@ -124,8 +175,50 @@ row {
   border: 1px solid grey;
 }
 
-.btn-submit:hover {
+.btn-submit:hover,
+.btn-edit-profile:hover,
+.btn-edit-save-img:hover {
   background: rgb(226, 145, 87);
+}
+
+.btn-profile {
+  margin-top: 5px;
+  justify-content: center;
+  width: 270px;
+}
+
+.btn-profile-visible {
+  margin-top: 5px;
+  justify-content: center;
+  display: flex;
+  width: 270px;
+}
+
+.btn-edit-profile {
+  width: 50%;
+  padding: 5px 20px;
+  background-color: orange;
+  border-color: orange;
+  color: white;
+}
+
+.btn-profile-picture {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.btn-profile-details {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.btn-edit-save-img {
+  width: 100%;
+  border-radius: 4px;
+  padding: 5px 20px;
+  border-color: rgb(207, 48, 0);
+  color: white;
+  background-color: rgb(207, 48, 0)
 }
 
 .small-text {
@@ -135,9 +228,7 @@ row {
 }
 
 .container {
-  border: solid 1px red;
   padding: 15px;
-  /* height: 675px; */
 }
 
 .entries-window {
@@ -160,7 +251,8 @@ row {
 }
 
 .entry-card-display,
-.entry-display {
+.entry-display,
+.profile-display {
   border: solid black 1px;
   background-color: black;
   opacity: 0.7;
@@ -185,11 +277,17 @@ row {
 }
 
 .entry-card-title,
-.entry-title {
+.entry-title,
+.profile-title {
   text-align: center;
   font-size: 25px;
   font-weight: 700;
   color: orange;
+}
+
+.entry-title,
+.profile-title {
+  margin: 20px 0px;
 }
 
 .entry-card-title {
@@ -204,7 +302,8 @@ row {
 }
 
 .entry-card-body,
-.entry-body {
+.entry-body,
+.profile-body {
   font-size: 15px;
   color: white;
   overflow: scroll;
@@ -216,9 +315,14 @@ row {
   height: 75%;
 }
 
-.entry-body {
+.entry-body,
+.profile-body {
   height: 350px;
 }
+
+/* .profile-body {
+  text-align: center;
+} */
 
 .entry-title {
   width: 80%;
@@ -232,70 +336,18 @@ row {
   width: 100%;
   font-size: 15px;
   background-color: white;
-  /* background-color: rgba(250, 235, 214, 0.849); */
   resize: vertical;
 }
 
-.profile-display {
-  border: solid black 1px;
-  position: relative;
-  background-color: black;
-  margin: 0 15px;
-  padding: 15px 15px;
-  width: 100%;
-  height: 350px;
-  font-weight: 600;
-  text-align: left;
-}
-
-.navbar-display {
-  background-image: linear-gradient(rgb(207, 117, 0), orange);
-  height: 4%;
-  overflow: auto;
-}
-
-.navbar-icon {
-  background-image: linear-gradient(to bottom right, rgb(207, 48, 0), orange);
-  font-weight: bold;
-  font-size: 20px;
-  border-right: 3px solid white;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  /* background-image: linear-gradient(rgb(207, 117, 0), orange); */
-}
-
-li {
-  float: left;
-}
-
-.navbar-item a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover:not(.active) {
-  background-color: #111;
+.view-profile-card {
+  margin: 5% auto 5% auto;
 }
 
 .active {
   background-color: #4CAF50;
 }
 
-.nav-auth {
-  float:right
-}
-
-
+/*
 .profile-body {
   font-size: 18px;
   margin: 10px 10px;
@@ -303,8 +355,36 @@ li a:hover:not(.active) {
   text-align: center;
   color: white;
   font-weight: 600;
-}
+} */
 
 #text-editor {
   height: 365px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+  position: fixed;
+  padding: 20px;
+  background: white;
+  width: 80%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
 }

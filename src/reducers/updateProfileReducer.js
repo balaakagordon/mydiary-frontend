@@ -1,19 +1,19 @@
 import {
-    GET_PROFILE_REQUEST,
-    GET_PROFILE_SUCCESS,
-    GET_PROFILE_FAILURE
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAILURE
 } from '../actions/types';
 import initialState from './initialState';
 
 export default function (state = initialState.getProfile, action) {
   switch (action.type) {
-    case GET_PROFILE_REQUEST:
+    case UPDATE_PROFILE_REQUEST:
       return {
         ...state,
         loading: true
       };
 
-      case GET_PROFILE_SUCCESS:
+      case UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
         profile: {
@@ -32,7 +32,7 @@ export default function (state = initialState.getProfile, action) {
         status: action.payload.status
       };
 
-      case GET_PROFILE_FAILURE:
+      case UPDATE_PROFILE_FAILURE:
       return {
         ...state,
         errors: null, //

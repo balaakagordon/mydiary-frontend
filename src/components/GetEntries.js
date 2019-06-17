@@ -35,7 +35,7 @@ class GetEntries extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('next ==> ', nextProps.entriesData);
+    // console.log('next ==> ', nextProps.entriesData);
     this.setState({
       entriesData: nextProps.entriesData
     });
