@@ -27,7 +27,8 @@ const userSignup = userData => (dispatch) => {
         dispatch(signupSuccess(response.data));
     })
     .catch(function (error) {
-        dispatch(signupFailure(error.response.data))
+        console.log('errors => ', error)
+        // dispatch(signupFailure(error.response.data))
     });
 };
 

@@ -132,7 +132,7 @@ export class LoginForm extends Component {
           className={'auth-form-input'}
         />
         <div className="auth-link">
-          <Link to="/">don't have an account?</Link>
+          <Link to="/register">don't have an account?</Link>
         </div>
         <div className="row">
           <div className="form-buttons">
