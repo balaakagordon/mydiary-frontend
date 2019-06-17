@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import ImageEditor from './ImageEditor';
 import ModalComponent from './ModalComponent';
 
@@ -69,9 +69,5 @@ class DisplayProfile extends Component {
         );
     }
 }
-
-// const modalContainer = document.createElement("div");
-// document.body.appendChild(modalContainer);
-// ReactDOM.render(<ModalComponent />, modalContainer)
 
 export default DisplayProfile

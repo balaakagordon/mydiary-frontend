@@ -27,6 +27,7 @@ class Registration extends Component {
 		};
 	}
 
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.status === 'success') {
 		  	this.handleSuccess(nextProps.message, nextProps.token);
@@ -60,7 +61,8 @@ class Registration extends Component {
 			message: null,
 			status: '',
 			token: '',
-			errors: null
+			errors: null,
+			showLoader: false
 		})
 	}
 
@@ -110,8 +112,7 @@ class Registration extends Component {
 			<div>
 				<SignupForm
 					user={this.state.user}
-					showloader={this.showLoader}
-					// handleLoader={this.handleLoader}
+					showloader={showLoader}
 					handleClearForm={this.handleClearForm}
 					handleFormSubmit={this.handleFormSubmit}
 					handleFormInput={this.handleFormInput}

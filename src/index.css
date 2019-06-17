@@ -232,6 +232,7 @@ row {
 }
 
 .entries-window {
+  border: 1px solid red;
   height: 75%;
   overflow: scroll;
 }
