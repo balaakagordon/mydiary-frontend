@@ -2951,6 +2951,19 @@ clone@^2.1.1:
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
 
+cloudinary-core@^2.6.2:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.6.3.tgz#6a5c773a8c48cbf5686dfcdd577445ab8efe8d85"
+  integrity sha512-0oEUn1eTuJzLxNdm0OsnAadGN6nMFOVqq+n7dgy6VBP8pGwc5TLkZ8MAHvik03Cv7+JH0tykwkSvYzM7rWY43g==
+
+cloudinary-react@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/cloudinary-react/-/cloudinary-react-1.1.1.tgz#95197c8a77d98a200805294ceb82e95c2dfa3792"
+  integrity sha512-iMr98xU/rLsTsveX2iwaO8bNRc+yjYz7sFwaknRHzlmxXhUTHP1lC5nKkDax5LecId0LS44NqyWC+TuZepPJig==
+  dependencies:
+    cloudinary-core "^2.6.2"
+    prop-types "^15.6.2"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -9732,7 +9745,7 @@ prop-types-exact@^1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9968,6 +9981,13 @@ react-attr-converter@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-attr-converter/-/react-attr-converter-0.3.1.tgz#4a2abf6d907b7ddae4d862dfec80e489ce41ad6e"
   integrity sha512-dSxo2Mn6Zx4HajeCeQNLefwEO4kNtV/0E682R1+ZTyFRPqxDa5zYb5qM/ocqw9Bxr/kFQO0IUiqdV7wdHw+Cdg==
+
+react-avatar-editor@^11.0.7:
+  version "11.0.7"
+  resolved "https://registry.yarnpkg.com/react-avatar-editor/-/react-avatar-editor-11.0.7.tgz#021053cfeaa138407b79279ee5a0384f273f0c54"
+  integrity sha512-GbNYBd1/L1QyuU9VRvOW0hSkW1R0XSneOWZFgqI5phQf6dX+dF/G3/AjiJ0hv3JWh2irMQ7DL0oYDKzwtTnNBQ==
+  dependencies:
+    prop-types "^15.5.8"
 
 react-dev-utils@^6.1.1:
   version "6.1.1"

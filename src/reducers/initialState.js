@@ -58,11 +58,17 @@ export default {
     },
     getProfile: {
         profile: {
+            id: null,
             firstName: null,
             lastName: null,
             email: null,
-            numEntries: null,
-            joined: null
+            image: null,
+            lastUsed: null,
+            currentEntries: null,
+            allEntries: null,
+            notifications: null,
+            createdAt: null,
+            // selectedFile: null
         },
         loading: false,
         status: null,

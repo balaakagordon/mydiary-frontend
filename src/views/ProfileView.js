@@ -1,46 +1,150 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { getProfile } from '../actions/profileActions';
+import getProfile from '../actionCreators/getProfile';
+import updateProfile from '../actionCreators/updateProfile';
 import { connect } from 'react-redux';
-import NavigationBar from '../components/navigation/NavigationBar';
+import { toast } from 'react-toastify';
 import DisplayProfile from '../components/DisplayProfile'
+import DefaultProfileImage from '../images/avatar.png';
 
 
 class ProfileView extends Component {
-    state = {}
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile: {
+                id: null,
+                firstName: null,
+                lastName: null,
+                email: null,
+                image: null,
+                lastUsed: null,
+                currentEntries: null,
+                allEntries: null,
+                notifications: null,
+                createdAt: null,
+                selectedFile: null
+            },
+            uploadButton: 'none',
+            loading: false,
+            status: null,
+            errors: null
+        }
+    }
 
     componentDidMount() {
-            this.props.getProfile();
-        }
-        render() {
-            let current_entries;
-            let last_visited;
-            let joined;
-            let notifications;
+        this.props.getProfile();
+    }
 
-        if(this.props.profile){
-            const profile = this.props.profile;
-            current_entries = profile.currentEntries;
-            joined = profile.registered;
-            last_visited = profile.lastUsed;
-            notifications = profile.notifications;
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+          profile: nextProps.profile,
+          loading: nextProps.loading,
+          status: nextProps.status,
+          errors: nextProps.errors
+        });
+    }
+
+    raiseErr = (message) => {
+        toast.error(message, {
+            position: toast.POSITION.TOP_CENTER,
+            // hideProgressBar: true
+        });
+    }
+
+    confirmPassword = () => {
+        if (!this.state.profile.confirmedPassword) {
+            this.raiseErr('Please confirm your new password');
+            return false;
+        } else if (this.state.profile.password !== this.state.profile.confirmedPassword) {
+            this.raiseErr('Your confirmed password must match your new password');
+            return false;
         }
-        return (
-            <div>
-                <section className="container">
-                    <DisplayProfile
-                        current_entries={current_entries}
-                        last_visited={last_visited}
-                        joined={joined}
-                        notifications={notifications}
-                    />
-                </section>
-        </div>
+        return true;
+    }
+
+    editProfile = () => {
+        if (this.state.profile !== this.props.profile) {
+            if (this.state.profile.password) {
+                if (!this.confirmPassword()) {
+                    return;
+                }
+            }
+            console.log('now I am editing', this.props.profile, this.state.profile);
+            this.props.updateProfile(
+                this.props.profile.id,
+                this.state.profile
             );
+        }
+    }
+
+    checkUploadResult = (resultEvent) => {
+        if (resultEvent.event === 'success') {
+            this.setState( prevState => {
+                return {
+                    profile: {
+                        ...prevState.profile,
+                        image: resultEvent.info.secure_url
+                    },
+                    uploadButton: 'block'
+                }
+            })
+        }
+    }
+
+    openWidget = () => {
+        this.widget.open()
+    }
+
+    handleModalInput = (event) => {
+        let {name, value} = event.target;
+        this.setState( prevState => {
+            return {
+                profile: {
+                    ...prevState.profile, [name]: value
+                }
+            }
+        })
+    }
+
+    render() {
+        this.widget = window.cloudinary.createUploadWidget(
+            {
+              cloudName: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+              uploadPreset: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET_NAME,
+              folder: process.env.REACT_APP_CLOUDINARY_FOLDER
+            },
+            (error, result) => {this.checkUploadResult(result)}
+        );
+
+        return (
+            <div className="container">
+                <DisplayProfile
+                    image={this.state.profile.image ?
+                        this.state.profile.image :
+                        DefaultProfileImage}
+                    user={this.state.profile.firstName}
+                    current_entries={this.state.profile.allEntries}
+                    last_visited={this.state.profile.lastUsed}
+                    joined={this.state.profile.createdAt}
+                    notifications={this.state.profile.notifications}
+                    uploadButton = {this.state.uploadButton}
+                    editProfile = {this.editProfile}
+                    openWidget = {this.openWidget}
+                    handleModalInput={this.handleModalInput}
+                />
+            </div>
+        );
     }
 }
 
 const mapStateToProps = state => ({
-    profile: state.users.profile,
+    profile: state.profile.profile,
+    loading: state.profile.loading,
+    status: state.profile.status,
+    errors: state.profile.errors,
   });
-export default connect(mapStateToProps, { getProfile })(ProfileView);
+
+export default connect(mapStateToProps, {
+    getProfile,
+    updateProfile
+})(ProfileView);
