@@ -20,9 +20,11 @@ const getOneEntry = entryId => (dispatch) => {
     dispatch(getEntryRequest());
     return axios.get(`${baseUrl}/v1/entries/${entryId}`, config)
     .then( function (response) {
+        console.log(response.data)
         dispatch(getEntrySuccess(response.data))
     })
     .catch( function (error) {
+        console.log(error.response)
         dispatch(getEntryFailure(error.response))
     });
 };

@@ -20,6 +20,7 @@ const updateEntry = (entryId, entryData) => (dispatch) => {
     dispatch(updateEntryRequest());
     return axios.put(`${baseUrl}/v1/entries/${entryId}`, JSON.stringify(entryData), config)
     .then( function (response) {
+        console.log('updated response ==> ', response.data)
         dispatch(updateEntrySuccess(response.data))
     })
     .catch( function (error) {

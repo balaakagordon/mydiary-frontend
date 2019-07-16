@@ -20,6 +20,7 @@ const userSignup = userData => (dispatch) => {
     return axios.post(`${baseUrl}/auth/register`, JSON.stringify(userData), config)
     .then( function (response) {
         if (response.data.data.token) {
+            // switch to js-cookie
             sessionStorage.setItem('token', response.data.data.token);
             sessionStorage.setItem('isLoggedIn', true);
         }
@@ -27,7 +28,9 @@ const userSignup = userData => (dispatch) => {
         dispatch(signupSuccess(response.data));
     })
     .catch(function (error) {
-        dispatch(signupFailure(error.response.data))
+        if (error.response.data) {
+            dispatch(signupFailure(error.response.data))
+        }
     });
 };
 

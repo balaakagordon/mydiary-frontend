@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The FormInputField component should match snapshot 1`] = `
+<FormInputField>
+  <div>
+    <div
+      className="entry-title"
+    >
+      <input
+        defaultValue={null}
+      />
+    </div>
+  </div>
+</FormInputField>
+`;

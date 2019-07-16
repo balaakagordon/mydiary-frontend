@@ -69,7 +69,6 @@ class ProfileView extends Component {
                     return;
                 }
             }
-            console.log('now I am editing', this.props.profile, this.state.profile);
             this.props.updateProfile(
                 this.props.profile.id,
                 this.state.profile

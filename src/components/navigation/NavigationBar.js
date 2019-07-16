@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import history from '../../history';
-import jwt_decode from 'jwt-decode';
-// import {logoutAction} from '../../actions/loginActions';
 import NavLinks from './NavLinks';
-// import { logOut } from '../../common/functions';
 
 
 class NavigationBar extends Component {
@@ -18,29 +13,40 @@ class NavigationBar extends Component {
       };
   }
 
-    componentWillMount() {
-      var isLoggedIn = sessionStorage.getItem('isLoggedIn');
-      if (isLoggedIn) {
-        // const token = sessionStorage.getItem('token');
-        // let user = jwt_decode(token);
-        this.setState({authenticated: isLoggedIn});
-        // REDIRECT IF ON AUTH PAGE
-      } else {
-        history.push('/');
-      }
+  componentWillMount() {
+    var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if (isLoggedIn) {
+      this.setState({authenticated: isLoggedIn});
+      // REDIRECT IF ON AUTH PAGE
+      // history.push('/home');
+    } else {
+      history.push('/');
     }
+  }
 
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.authenticated) {
-        this.setState({authenticated: nextProps.authenticated});
-      }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.authenticated) {
+      this.setState({authenticated: nextProps.authenticated});
     }
+    // } else {
+    //   this.setState({authenticated: false});
+    // }
+  }
+
+  logOut = () => {
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('isLoggedIn')
+    history.push('/');
+  }
 
   render() {
     return (
       <div className="navbar-display">
         <ul>
-          <NavLinks authenticated={this.state.authenticated} />
+          <NavLinks
+            authenticated={this.state.authenticated}
+            logOut={this.logOut}
+          />
         </ul>
       </div>
     );

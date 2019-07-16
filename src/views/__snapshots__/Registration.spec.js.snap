@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Registration Component The container element should match the snapshot 1`] = `
+Object {
+  "errors": null,
+  "loading": false,
+  "message": null,
+  "status": "",
+  "user": undefined,
+}
+`;
+
+exports[`The Registration Component should render correctly 1`] = `
+<div>
+  <SignupForm
+    handleClearForm={[Function]}
+    handleErrors={[Function]}
+    handleFormInput={[Function]}
+    handleFormSubmit={[Function]}
+    handleSuccess={[Function]}
+    showloader={null}
+    user={
+      Object {
+        "confirmedPassword": "",
+        "email": "",
+        "firstName": "",
+        "lastName": "",
+        "password": "",
+      }
+    }
+  />
+</div>
+`;

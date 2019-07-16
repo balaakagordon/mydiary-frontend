@@ -27,7 +27,9 @@ const userLogin = userData => (dispatch) => {
         dispatch(loginSuccess(response.data));
     })
     .catch(function (error) {
-        // dispatch(loginFailure(error.response.data))
+        if (error.response.data) {
+            dispatch(loginFailure(error.response.data))
+        }
     });
 };
 

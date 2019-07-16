@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import loginReducer from './loginReducer';
 import signupReducer from './signupReducer';
-import writeEntryReducer from './createEntryReducer';
+import createEntryReducer from './createEntryReducer';
+import updateEntryReducer from './updateEntryReducer';
 import getEntryReducer from './getEntryReducer';
 import getEntriesReducer from './getEntriesReducer';
 import getProfileReducer from './getProfileReducer';
@@ -12,7 +13,8 @@ export default combineReducers({
     signup: signupReducer,
     getEntry: getEntryReducer,
     getEntries: getEntriesReducer,
-    writeEntry: writeEntryReducer,
+    newEntry: createEntryReducer,
+    updateEntry: updateEntryReducer,
     profile: getProfileReducer,
     navbar: navbarReducer,
 });

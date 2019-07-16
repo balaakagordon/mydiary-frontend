@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 import initialState from './initialState';
 
-export default function (state = initialState.writeEntry, action) {
+export default function (state = initialState.updateEntry, action) {
   switch (action.type) {
     case UPDATE_ENTRY_REQUEST:
       return {

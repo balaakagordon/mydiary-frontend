@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const getUnauthenticatedUserLinks = () => {
+const getUnauthenticatedUserLinks = (props) => {
   return (
     <div>
       <li className="navbar-item">
@@ -15,9 +15,14 @@ const getUnauthenticatedUserLinks = () => {
         </Link>
       </li>
       <li className="navbar-item nav-auth">
-        <Link to="/">
-          Logout
-        </Link>
+        {/* {props.logOut} */}
+        {/* <Link to="/"> */}
+          <button
+            className="navbar-item logout"
+            onClick={props.logOut}>
+            Logout
+          </button>
+        {/* </Link> */}
       </li>
     </div>
   )
@@ -30,7 +35,7 @@ const NavLinks = (props) => (
         MyDiary
       </Link>
     </li>
-    {props.authenticated ? getUnauthenticatedUserLinks() : null}
+    {props.authenticated ? getUnauthenticatedUserLinks(props) : null}
   </div>
 );
 
