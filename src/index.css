@@ -74,6 +74,15 @@ a:hover {
   color: rgb(155, 136, 101);
 }
 
+.logout {
+  text-decoration: none;
+  background-image: linear-gradient(rgb(207, 117, 0), orange);
+  height: 45px;
+  color: white;
+  font-size: 16px;
+  border: none;
+}
+
 .auth-form {
   border: solid 1px gray;
   border-radius: 7px;
@@ -232,8 +241,7 @@ row {
 }
 
 .entries-window {
-  border: 1px solid red;
-  height: 75%;
+  height: 640px;
   overflow: scroll;
 }
 

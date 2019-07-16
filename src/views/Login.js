@@ -8,7 +8,7 @@ import userLogin from "../actionCreators/userLogin";
 import LoginForm from '../components/LoginForm'
 
 
-class Login extends Component {
+export class Login extends Component {
 	constructor(props) {
 		super(props);
 
@@ -26,7 +26,7 @@ class Login extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.status === "success") {
-			return this.handleSuccess(nextProps.message, nextProps.token)
+			return this.handleSuccess(nextProps.message)
 		} else if (nextProps.status === "error") {
 			this.handleErrors(nextProps.errors);
 		}
@@ -116,7 +116,7 @@ class Login extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
 	user: state.login.user,
 	loading: state.login.loading,
 	message: state.login.message,

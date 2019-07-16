@@ -54,17 +54,17 @@ class Home extends Component {
         } else {
         listEntries = this.state.entriesData.entries.map(entry => (
             <div key={entry.title}>
-            <Link to={`${entry.id}`}>
-                <PreviewEntryCard
-                date={entry.updated_at}
-                title={entry.title}
-                author={entry.author}
-                entryId={entry.id}
-                body={renderHTML(entry.body)}
-                // next={entries.next}
-                // previous={entries.previous}
-                />
-            </Link>
+                <Link to={`${entry.id}`}>
+                    <PreviewEntryCard
+                    date={entry.updated_at}
+                    title={entry.title}
+                    author={entry.author}
+                    entryId={entry.id}
+                    body={renderHTML(entry.body)}
+                    // next={entries.next}
+                    // previous={entries.previous}
+                    />
+                </Link>
             </div>
         ));
         noEntries = null;

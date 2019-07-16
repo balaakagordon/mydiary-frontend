@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 
 export class PreviewEntryCard extends Component {
-  state = {};
-
   render() {
     return (
         <div className="preview-entry-card">

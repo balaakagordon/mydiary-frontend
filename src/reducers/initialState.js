@@ -32,7 +32,18 @@ export default {
         status: null,
         errors: null
     },
-    writeEntry: {
+    newEntry: {
+        entry: {
+            title: '',
+            body: '',
+            lastEdited: null
+        },
+        loading: false,
+        status: null,
+        message: null,
+        errors: null
+    },
+    updateEntry: {
         entry: {
             title: '',
             body: '',

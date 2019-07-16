@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Login Component The container element should match the snapshot 1`] = `
+Object {
+  "errors": null,
+  "loading": false,
+  "message": null,
+  "status": "",
+  "token": "",
+  "user": undefined,
+}
+`;
+
+exports[`The Login Component should render correctly 1`] = `
+<div>
+  <LoginForm
+    handleClearForm={[Function]}
+    handleErrors={[Function]}
+    handleFormInput={[Function]}
+    handleFormSubmit={[Function]}
+    handleSuccess={[Function]}
+    showLoader={null}
+    user={
+      Object {
+        "email": "",
+        "password": "",
+      }
+    }
+  />
+</div>
+`;
